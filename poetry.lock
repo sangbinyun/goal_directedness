@@ -7405,6 +7405,97 @@ files = [
 ]
 
 [[package]]
+name = "torch"
+version = "2.1.0+cu121"
+description = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
+optional = false
+python-versions = ">=3.8.0"
+files = [
+    {file = "torch-2.1.0+cu121-cp310-cp310-linux_x86_64.whl", hash = "sha256:0d4e8c52a1fcf5ed6cfc256d9a370fcf4360958fc79d0b08a51d55e70914df46"},
+    {file = "torch-2.1.0+cu121-cp310-cp310-win_amd64.whl", hash = "sha256:6ee083ba804e863af059ea284c1678c1b0628699fb0014c8e043ceed7d4ce930"},
+    {file = "torch-2.1.0+cu121-cp311-cp311-linux_x86_64.whl", hash = "sha256:aa984599c2c4ffbc57c48d0d965cbe832e610c967e8179d4ac0a582c733fe112"},
+    {file = "torch-2.1.0+cu121-cp311-cp311-win_amd64.whl", hash = "sha256:3b7c6dd1ab12a9c70b29bf1ea34fcf2c519233c58c619c1a553d328955c8a602"},
+    {file = "torch-2.1.0+cu121-cp38-cp38-linux_x86_64.whl", hash = "sha256:4c83190ad649c77adaf6e1c616998f10598db696912ea7a410831632890b49bf"},
+    {file = "torch-2.1.0+cu121-cp38-cp38-win_amd64.whl", hash = "sha256:fb808a620951b8cfb4b55cbaf8ace4b7a6d51c5be03d46513d73d009f43aafeb"},
+    {file = "torch-2.1.0+cu121-cp39-cp39-linux_x86_64.whl", hash = "sha256:94b60ae7562ae732554ae8744123b33d46e659c3251a5a58c7269c12e838868b"},
+    {file = "torch-2.1.0+cu121-cp39-cp39-win_amd64.whl", hash = "sha256:ff0ee0b7ab3d6cfbf7875c8b1d130309ee5a18fbf2fda11f3da86a783e6e679c"},
+]
+
+[package.dependencies]
+filelock = "*"
+fsspec = "*"
+jinja2 = "*"
+networkx = "*"
+sympy = "*"
+triton = "2.1.0"
+typing-extensions = "*"
+
+[package.extras]
+dynamo = ["jinja2"]
+opt-einsum = ["opt-einsum (>=3.3)"]
+
+[package.source]
+type = "legacy"
+url = "https://download.pytorch.org/whl/cu121"
+reference = "torch"
+
+[[package]]
+name = "torchaudio"
+version = "2.1.0+cu121"
+description = "An audio package for PyTorch"
+optional = false
+python-versions = "*"
+files = [
+    {file = "torchaudio-2.1.0+cu121-cp310-cp310-linux_x86_64.whl", hash = "sha256:676bda4042734eda99bc59b2d7f761f345d3cde0cad492ad34e3aefde688c6d8"},
+    {file = "torchaudio-2.1.0+cu121-cp310-cp310-win_amd64.whl", hash = "sha256:7e4a9a2f899dcd87c9f069a00658e5720bfb45cfe2e8cc944cb4d45104bbf91a"},
+    {file = "torchaudio-2.1.0+cu121-cp311-cp311-linux_x86_64.whl", hash = "sha256:70282de5756a33de96dca1cc5b68eb958df69d5aef8869880403e097db1ff091"},
+    {file = "torchaudio-2.1.0+cu121-cp311-cp311-win_amd64.whl", hash = "sha256:4357382a29000c474bd246957035c6542233eb75bb5750c89cd5a048f505754a"},
+    {file = "torchaudio-2.1.0+cu121-cp38-cp38-linux_x86_64.whl", hash = "sha256:51acb4689a7b01f258e31aeec9b9a87e8483742261bd11e12f80734c888cde88"},
+    {file = "torchaudio-2.1.0+cu121-cp38-cp38-win_amd64.whl", hash = "sha256:24f9deeea8304da6966cc44a24c236c042fe54247965a64a6237423844535656"},
+    {file = "torchaudio-2.1.0+cu121-cp39-cp39-linux_x86_64.whl", hash = "sha256:81149a6e99bfe7a96cbb879f4fc33fe46989ab954e049b9a8eebbbece3f2a7bd"},
+    {file = "torchaudio-2.1.0+cu121-cp39-cp39-win_amd64.whl", hash = "sha256:f663ab65ef20f72587102b2844b92fd94847848284de88a906908676beb25498"},
+]
+
+[package.dependencies]
+torch = "2.1.0"
+
+[package.source]
+type = "legacy"
+url = "https://download.pytorch.org/whl/cu121"
+reference = "torch"
+
+[[package]]
+name = "torchvision"
+version = "0.16.0+cu121"
+description = "image and video datasets and models for torch deep learning"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "torchvision-0.16.0+cu121-cp310-cp310-linux_x86_64.whl", hash = "sha256:e76e78d0ad43636c9884b3084ffaea8a8b61f21129fbfa456a5fe734f0affea9"},
+    {file = "torchvision-0.16.0+cu121-cp310-cp310-win_amd64.whl", hash = "sha256:7bb32e2c163766045693e557b61f278eb54960e7cab7c5d6037b89847605e26c"},
+    {file = "torchvision-0.16.0+cu121-cp311-cp311-linux_x86_64.whl", hash = "sha256:7a325270c7806571ceddbd27c8ece5c163cceb476f09dcca7eb5157073216b22"},
+    {file = "torchvision-0.16.0+cu121-cp311-cp311-win_amd64.whl", hash = "sha256:09dea0b374be56df4ae148e83221f172a8a6c999475e9483037ab6efa3cd6b80"},
+    {file = "torchvision-0.16.0+cu121-cp38-cp38-linux_x86_64.whl", hash = "sha256:967c0f8ada2abeed430b33e83ce7b3de5233675c8b020c18c1255dca065b4add"},
+    {file = "torchvision-0.16.0+cu121-cp38-cp38-win_amd64.whl", hash = "sha256:d4be401c6a9b2af7ea476e79a6397a77a952b6a3bec6218452be13d1b18b9c54"},
+    {file = "torchvision-0.16.0+cu121-cp39-cp39-linux_x86_64.whl", hash = "sha256:5ea8bba7e82bf89467e7f8790499e3c20c97c7d0ccd778789ccdd2d84c647c9a"},
+    {file = "torchvision-0.16.0+cu121-cp39-cp39-win_amd64.whl", hash = "sha256:e0b29e67f0f2b059fc99d0bb9dae3f107a0bcd656e0310504758569a137f874b"},
+]
+
+[package.dependencies]
+numpy = "*"
+pillow = ">=5.3.0,<8.3.dev0 || >=8.4.dev0"
+requests = "*"
+torch = "2.1.0"
+
+[package.extras]
+scipy = ["scipy"]
+
+[package.source]
+type = "legacy"
+url = "https://download.pytorch.org/whl/cu121"
+reference = "torch"
+
+[[package]]
 name = "tornado"
 version = "6.4.1"
 description = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."
@@ -7526,6 +7617,31 @@ torch-vision = ["Pillow (>=10.0.1,<=15.0)", "torchvision"]
 torchhub = ["filelock", "huggingface-hub (>=0.23.2,<1.0)", "importlib-metadata", "numpy (>=1.17)", "packaging (>=20.0)", "protobuf", "regex (!=2019.12.17)", "requests", "sentencepiece (>=0.1.91,!=0.1.92)", "tokenizers (>=0.19,<0.20)", "torch", "tqdm (>=4.27)"]
 video = ["av (==9.2.0)", "decord (==0.6.0)"]
 vision = ["Pillow (>=10.0.1,<=15.0)"]
+
+[[package]]
+name = "triton"
+version = "2.1.0"
+description = "A language and compiler for custom Deep Learning operations"
+optional = false
+python-versions = "*"
+files = [
+    {file = "triton-2.1.0-0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:66439923a30d5d48399b08a9eae10370f6c261a5ec864a64983bae63152d39d7"},
+    {file = "triton-2.1.0-0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:919b06453f0033ea52c13eaf7833de0e57db3178d23d4e04f9fc71c4f2c32bf8"},
+    {file = "triton-2.1.0-0-cp37-cp37m-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:ae4bb8a91de790e1866405211c4d618379781188f40d5c4c399766914e84cd94"},
+    {file = "triton-2.1.0-0-cp38-cp38-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:39f6fb6bdccb3e98f3152e3fbea724f1aeae7d749412bbb1fa9c441d474eba26"},
+    {file = "triton-2.1.0-0-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:21544e522c02005a626c8ad63d39bdff2f31d41069592919ef281e964ed26446"},
+    {file = "triton-2.1.0-0-pp37-pypy37_pp73-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:143582ca31dd89cd982bd3bf53666bab1c7527d41e185f9e3d8a3051ce1b663b"},
+    {file = "triton-2.1.0-0-pp38-pypy38_pp73-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:82fc5aeeedf6e36be4e4530cbdcba81a09d65c18e02f52dc298696d45721f3bd"},
+    {file = "triton-2.1.0-0-pp39-pypy39_pp73-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:81a96d110a738ff63339fc892ded095b31bd0d205e3aace262af8400d40b6fa8"},
+]
+
+[package.dependencies]
+filelock = "*"
+
+[package.extras]
+build = ["cmake (>=3.18)", "lit"]
+tests = ["autopep8", "flake8", "isort", "numpy", "pytest", "scipy (>=1.7.1)"]
+tutorials = ["matplotlib", "pandas", "tabulate"]
 
 [[package]]
 name = "typer"
@@ -8482,4 +8598,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "510bc51dc2f099defe96a4139bf447a4e66784e1378556dab5d7a2d1744eeb01"
+content-hash = "fdff955a5f9acbd559c1d9aef2761c12d50c761754e0f5ed04975fa55c617e66"
