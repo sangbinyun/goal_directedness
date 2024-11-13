@@ -7,7 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-dspy-ai = "^2.5.16"
 autorag = "^0.3.7"
 python-dotenv = "^1.0.1"
 torch = { version = "2.1.0", source="torch"}

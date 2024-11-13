@@ -1,4 +1,5 @@
 .env
+__pycache__
 /test/TrustLLM
 /test/trustllm
 /test/trustllm_dataset
