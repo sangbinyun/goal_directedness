@@ -6,18 +6,15 @@ from pydantic import BaseModel
 from prompt import PromptTemplate
 from utils import load_llm, connect_to_sql_memory
 
-# LLM
-llm = load_llm('openai')
-
 # State
-
 class State(MessagesState):
     context: list[str]
     problem: str
     sub_problems: str
     dependencies: list
     sub_problem_solutions: list
-    reasoning: list
+    sub_problem_reasoning: list
+    final_reasoning: str
     def __init__(self, given_context):
         # super().__init__(given_context)
         self.context = given_context
@@ -29,70 +26,82 @@ class Refined(BaseModel):
 
 class Solved(BaseModel):
     sub_problem_solutions: list[str]
-    reasoning: list[str]
+    sub_problem_reasoning: list[str]
 
-# Graph functions
-def problem_analyzer(state: State):
-    # Refinement prompt
-    _orig_problem = state['messages'][-1].content
-    _prompt = [
-        SystemMessage(
-            PromptTemplate.problem_analysis.format(
-                Problem = _orig_problem,
-                Context = state['context']
+class Aggregated(BaseModel):
+    answer: str
+    final_reasoning: str
+
+# Graph call
+def build_graph(model_name: str, ExperimentName: str):
+    # LLM
+    llm = load_llm(model_name)
+
+    # graph functions
+    def problem_analyzer(state: State):
+        # Refinement prompt
+        _orig_problem = state['messages'][-1].content
+        _prompt = [
+            SystemMessage(
+                PromptTemplate.problem_analysis.format(
+                    Problem = _orig_problem,
+                    Context = state['context']
+                )
             )
-        )
-    ]
+        ]
 
-    # Invoke the LLM
-    structured_llm = llm.with_structured_output(Refined)
-    _response = structured_llm.invoke(_prompt)
+        # Invoke the LLM
+        structured_llm = llm.with_structured_output(Refined)
+        _response = structured_llm.invoke(_prompt)
 
-    return {
-        'problem': _response.problem, 
-        'sub_problems': _response.sub_problems,
-        'dependencies': _response.dependencies
-    }
+        return {
+            'problem': _response.problem, 
+            'sub_problems': _response.sub_problems,
+            'dependencies': _response.dependencies
+        }
 
-def subproblem_solver(state: State):
-    # sub-problem solver
-    _prompt = [
-        SystemMessage(
-            PromptTemplate.subproblem_solution.format(
-                SubProblem = state['sub_problems'],
-                Dependencies = state['dependencies'],
-                Context = state['context']
+    def subproblem_solver(state: State):
+        # sub-problem solver
+        _prompt = [
+            SystemMessage(
+                PromptTemplate.subproblem_solution.format(
+                    SubProblem = state['sub_problems'],
+                    Dependencies = state['dependencies'],
+                    Context = state['context']
+                )
             )
-        )
-    ]
+        ]
 
-    # Invoke the LLM
-    structured_llm = llm.with_structured_output(Solved)
-    _response = structured_llm.invoke(_prompt)
-    
-    return {
-        'sub_problem_solutions': _response.sub_problem_solutions,
-        'reasoning': _response.reasoning
-    }
+        # Invoke the LLM
+        structured_llm = llm.with_structured_output(Solved)
+        _response = structured_llm.invoke(_prompt)
+        
+        return {
+            'sub_problem_solutions': _response.sub_problem_solutions,
+            'sub_problem_reasoning': _response.reasoning
+        }
 
-def solution_aggregator(state: State):
-    # solution aggregator
-    _prompt = [
-        SystemMessage(
-            PromptTemplate.solution_aggregation.format(
-                RefinedProblem = state['problem'],  
-                SubProblemSolutions = state['sub_problem_solutions'],
-                Context = state['context']
+    def solution_aggregator(state: State):
+        # solution aggregator
+        _prompt = [
+            SystemMessage(
+                PromptTemplate.solution_aggregation.format(
+                    RefinedProblem = state['problem'],  
+                    SubProblemSolutions = state['sub_problem_solutions'],
+                    Context = state['context']
+                )
             )
-        )
-    ]
+        ]
 
-    # Invoke the LLM
-    _response = llm.invoke(_prompt)
-    
-    return {'messages': _response}
+        # Invoke the LLM
+        structured_llm = llm.with_structured_output(Aggregated)
+        _response = llm.invoke(_prompt)
+        
+        return {
+            'messages': _response.answer, 
+            'final_reasoning': _response.final_reasoning
+        }
 
-def build_graph(ExperimentName):
     # Graph
     graph = StateGraph(State)
 
@@ -112,3 +121,6 @@ def build_graph(ExperimentName):
     graph = graph.compile(checkpointer = memory)
 
     return graph
+
+# from IPython.display import Image, display
+# display(Image(graph.get_graph().draw_mermaid_png()))

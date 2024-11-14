@@ -7,12 +7,12 @@ def load_llm(model: str):
             temperature = 0
         )
     elif model == 'ollama':
-        from langchain_ollama import OllamaLLM
-        llm = OllamaLLM(
+        from langchain_ollama import ChatOllama
+        llm = ChatOllama(
             model = 'llama3.2:3b-instruct-fp16',
             base_url = "http://localhost:11434",
             temperature = 0,
-            verbose = True,
+            verbose = True
         )
     return llm
 
@@ -28,7 +28,7 @@ def connect_to_sql_memory(ExperimentName: str):
     from langgraph.checkpoint.sqlite import SqliteSaver
 
     db_path = f"state_db/{ExperimentName}.db"
-    conn = sqlite3.connect(db_path, check_same_thread=False)
+    conn = sqlite3.connect(db_path, check_same_thread=True)
 
     # checkpointer 
     memory = SqliteSaver(conn)
