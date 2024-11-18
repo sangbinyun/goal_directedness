@@ -28,7 +28,7 @@ def connect_to_sql_memory(ExperimentName: str):
     from langgraph.checkpoint.sqlite import SqliteSaver
 
     db_path = f"state_db/{ExperimentName}.db"
-    conn = sqlite3.connect(db_path, check_same_thread=True)
+    conn = sqlite3.connect(db_path, check_same_thread = False)
 
     # checkpointer 
     memory = SqliteSaver(conn)

@@ -10,7 +10,7 @@ from utils import load_llm, connect_to_sql_memory
 class State(MessagesState):
     context: list[str]
     problem: str
-    sub_problems: str
+    sub_problems: list
     dependencies: list
     sub_problem_solutions: list
     sub_problem_reasoning: list
@@ -21,7 +21,7 @@ class State(MessagesState):
 
 class Refined(BaseModel):
     problem: str
-    sub_problems: str
+    sub_problems: list[str]
     dependencies: list[str]
 
 class Solved(BaseModel):
@@ -78,7 +78,7 @@ def build_graph(model_name: str, ExperimentName: str):
         
         return {
             'sub_problem_solutions': _response.sub_problem_solutions,
-            'sub_problem_reasoning': _response.reasoning
+            'sub_problem_reasoning': _response.sub_problem_reasoning
         }
 
     def solution_aggregator(state: State):
@@ -95,10 +95,10 @@ def build_graph(model_name: str, ExperimentName: str):
 
         # Invoke the LLM
         structured_llm = llm.with_structured_output(Aggregated)
-        _response = llm.invoke(_prompt)
+        _response = structured_llm.invoke(_prompt)
         
         return {
-            'messages': _response.answer, 
+            'messages': AIMessage(_response.answer), 
             'final_reasoning': _response.final_reasoning
         }
 

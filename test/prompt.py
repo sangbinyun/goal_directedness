@@ -38,7 +38,7 @@ class PromptTemplate:
         "   - Review any relevant documentation provided\n" \
         "   - Reference specific components or patterns that could be reused\n\n" \
         "Given problem: {Problem}\n" \
-        "Context: {Context}\n" \
+        "Context: {Context}\n\n" \
         "First provide your analysis and refined problem statement, then give a hierarchical breakdown showing the vertical dependencies between sub-problems."
 
     subproblem_solution = "You are an expert problem solver focused on solving specific sub-problems with access to relevant context.\n" \
@@ -53,19 +53,26 @@ class PromptTemplate:
         "7. Referencing specific patterns or components from context where applicable\n\n" \
         "Sub-problems: {SubProblem}\n" \
         "Dependencies: {Dependencies}\n" \
-        "Context: {Context}\n" \
+        "Context: {Context}\n\n" \
         "Provide your detailed solution for this specific sub-problem."
 
     solution_aggregation = "You are an expert in synthesizing solutions with access to relevant context.\n" \
         "Your task is to aggregate the solutions from all sub-problems by:\n" \
-        "0. Think step by step through the entire analysis process\n" \
-        "1. Reviewing all sub-problem solutions\n" \
-        "2. Ensuring consistency across solutions\n" \
-        "3. Resolving any conflicts or inconsistencies\n" \
-        "4. Combining the solutions in a coherent way\n" \
-        "5. Verifying the combined solution addresses the refined problem\n\n" \
-        "6. Refering any relevant context provided if it's necessary\n\n" \
+        "1. Reviewing all sub-problem solutions to extract key insights\n" \
+        "2. Ensuring consistency and resolving any conflicts across solutions\n" \
+        "3. Combining the solutions in a coherent way and concise way\n" \
+        "4. Verifying the combined solution effectively addresses the refined problem\n\n" \
+        "5. Refering to relevant context only if necessary for clarity\n\n" \
         "Refined Problem: {RefinedProblem}\n" \
         "Sub-problem Solutions: {SubProblemSolutions}\n" \
-        "Context: {Context}\n" \
-        "Provide a comprehensive solution that addresses the original problem by synthesizing all sub-solutions."
+        "Context: {Context}\n\n" \
+        "Provide a concise, comprehensive solution that synthesizes all sub-problem solutions and addresses the original problem."
+
+    hotpot_evaluation = """
+        Your job is to determine if the provided answer is fully correct based on the given question and the correct answer. 
+        Focus only on the factual correctness and completeness of the answer. Respond with YES or NO. \n
+        Question: {question} \n
+        Correct Answer: {correct_answer} \n
+        Answer you should evaluate: {answer} \n\n
+        If you are unsure, provide a brief explanation of why and suggest YES or NO.
+        """
