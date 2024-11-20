@@ -14,6 +14,7 @@ class State(MessagesState):
     dependencies: list
     sub_problem_solutions: list
     sub_problem_reasoning: list
+    supporting_documents: list
     final_reasoning: str
     def __init__(self, given_context):
         # super().__init__(given_context)
@@ -27,6 +28,7 @@ class Refined(BaseModel):
 class Solved(BaseModel):
     sub_problem_solutions: list[str]
     sub_problem_reasoning: list[str]
+    supporting_documents: list[int]
 
 class Aggregated(BaseModel):
     answer: str
@@ -78,7 +80,8 @@ def build_graph(model_name: str, ExperimentName: str):
         
         return {
             'sub_problem_solutions': _response.sub_problem_solutions,
-            'sub_problem_reasoning': _response.sub_problem_reasoning
+            'sub_problem_reasoning': _response.sub_problem_reasoning,
+            'supporting_documents': _response.supporting_documents
         }
 
     def solution_aggregator(state: State):
@@ -88,6 +91,9 @@ def build_graph(model_name: str, ExperimentName: str):
                 PromptTemplate.solution_aggregation.format(
                     RefinedProblem = state['problem'],  
                     SubProblemSolutions = state['sub_problem_solutions'],
+                    SubProblemSolutionsReasoning = state['sub_problem_reasoning'],
+                    Dependencies = state['dependencies'],
+                    SupportingDocuments = state['supporting_documents'],
                     Context = state['context']
                 )
             )
