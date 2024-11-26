@@ -1,57 +1,46 @@
 # prompt.py
 class PromptTemplate:
-    problem_analysis = "You are an expert problem analyzer and decomposer with access to relevant context.\n" \
-        "Your task is to verify, refine, and break down the given problem by following these steps:\n" \
-        "0. Think step by step through the entire analysis process\n" \
-        "1. Verify the problem:\n" \
-        "   - Identify the core objective and constraints\n" \
-        "   - Check if the problem is well-defined with clear success criteria\n" \
-        "   - Highlight key assumptions and prerequisites\n" \
-        "   - Reformulate if needed to make more precise and actionable\n" \
-        "2. Decompose the refined problem:\n" \
-        "   - Identify the main components that need to be solved\n" \
-        "   - Arrange sub-problems in a vertical sequence with dependencies\n" \
-        "   - Further decompose sub-problems that require multiple steps\n" \
-        "   - Specifying dependencies between sub-problems\n" \
-        "   - Keep decomposition compact for single-step problems\n" \
-        "3. Consider the provided context:\n" \
-        "   - Review any relevant documentation provided\n" \
-        "   - Reference specific components or patterns that could be reused\n\n" \
-        "Given problem: {Problem}\n" \
+    problem_analysis = (
+        "You are an expert problem analyzer with context access.\n " \
+        "Verify, refine, and decompose the given problem step-by-step:\n" \
+        "1. Verify: Identify objectives, constraints, and success criteria. " \
+        "Reformulate if unclear or imprecise.\n" \
+        "2. Decompose: Break the refined problem into components, sequence sub-problems, and define dependencies. " \
+        "Keep decomposition concise for single-step problems and incorporate context if necessary.\n\n" \
+        "Problem: {Problem}\n" \
         "Context: {Context}\n\n" \
-        "First provide your analysis and refined problem statement, then give a hierarchical breakdown showing the vertical dependencies between sub-problems."
+        "Provide your refined problem and a hierarchical breakdown of sub-problems with dependencies."
+    )
 
-    subproblem_solution = "You are an expert problem solver focused on solving specific sub-problems with access to relevant context.\n" \
-        "Your task is to solve the given sub-problems by:\n" \
-        "0. Think step by step through the entire analysis process\n" \
-        "1. Understanding the specific scope and requirements of these sub-problems\n" \
-        "2. Reviewing provided context\n" \
-        "3. Applying relevant domain knowledge and techniques\n" \
-        "4. Providing a clear and detailed solutions\n" \
-        "5. Explaining your reasoning processes\n" \
-        "6. Ensuring the solutions align with any dependencies or constraints\n" \
-        "7. Referencing specific patterns or components from context where applicable\n\n" \
+    subproblem_solution = (
+        "You are an expert sub-problem solver with context access. " \
+        "Solve the sub-problems step-by-step:\n" \
+        "1. Understand scope, requirements, and context.\n" \
+        "2. Apply domain knowledge and techniques.\n" \
+        "3. Provide clear, detailed solutions aligned with dependencies.\n" \
+        "4. Refer to specific patterns or components from context.\n\n" \
         "Sub-problems: {SubProblem}\n" \
         "Dependencies: {Dependencies}\n" \
-        "Contexts (Documents with Index Numbers): {Context}\n\n" \
-        "Provide your detailed solutions for each sub-problems and lists all referred documents as those number."
+        "Context (Document Index Numbers): {Context}\n\n" \
+        "Provide solutions for each sub-problem with referenced documents as numbers."        
+    )
 
-    solution_aggregation = "You are an expert in synthesizing solutions with access to relevant context.\n" \
-        "Your task is to aggregate the solutions from all sub-problems by:\n" \
-        "1. Reviewing all sub-problem solutions to extract key insights\n" \
-        "2. Ensuring consistency and resolving any conflicts across solutions\n" \
-        "3. Combining the solutions in a coherent way and concise way\n" \
-        "4. Verifying the combined solution effectively addresses the refined problem\n" \
-        "5. Refering to relevant context only if necessary for clarity\n\n" \
-        "Refined Problem: {RefinedProblem}\n" \
-        "Sub-problem Solutions: {SubProblemSolutions}\n" \
-        "Sub-problem Solutions Reasoning: {SubProblemSolutionsReasoning}\n" \
-        "Dependencies: {Dependencies}\n" \
-        "Expected Supporting Documents Numbers: {SupportingDocuments}\n" \
-        "Context: {Context}\n\n" \
-        "Provide your solution for the refined problem in the following format:\n" \
-        "1. Final Solution (Compact): Provide a direct and concise answer to the refined problem within few or several words.\n" \
-        "2. Comprehensive Reasoning: Explain step-by-step how the sub-problem solutions were synthesized, highlighting key insights, resolving conflicts, and how the final solution aligns with the refined problem.\n"     
+    solution_aggregation = (
+        "You are an expert in synthesizing subproblem solutions using context. "
+        "Aggregate sub-problem solutions:\n"
+        "1. Extract key insights.\n"
+        "2. Resolve conflicts.\n"
+        "3. Combine solutions concisely.\n"
+        "4. Verify alignment with the refined problem.\n\n"
+        "Refined Problem: {RefinedProblem}\n"
+        "Sub-problems: {SubProblems}\n"
+        "Sub-problem Solutions: {SubProblemSolutions}\n"
+        "Dependencies: {Dependencies}\n"
+        "Supporting Documents: {SupportingDocuments}\n"
+        "Context: {Context}\n\n"
+        "Provide a concise final answer and step-by-step reasoning aligned with the refined problem."
+    )   
+ 
 
     hotpot_evaluation = """
         Your job is to determine if the provided answer is fully correct based on the given question and the correct answer. 

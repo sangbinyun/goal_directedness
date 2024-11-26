@@ -42,3 +42,19 @@ def connect_to_sql_memory(ExperimentName: str):
 
     return memory
 
+def extract_data_info(data: dict):
+    # Extract data info
+    unique_id = data['id']
+    question = data['question']
+    contexts = [
+        "{}. {}: {}".format(doc_id+1, title, " ".join(sentences)) 
+        for doc_id, (title, sentences)
+        in enumerate(
+            zip(
+                data['context']['title'], 
+                data['context']['sentences']
+            )
+        )
+    ]
+
+    return unique_id, question, contexts

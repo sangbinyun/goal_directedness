@@ -89,9 +89,9 @@ def build_graph(model_name: str, ExperimentName: str):
         _prompt = [
             SystemMessage(
                 PromptTemplate.solution_aggregation.format(
-                    RefinedProblem = state['problem'],  
+                    RefinedProblem = state['problem'],
+                    SubProblems = state['sub_problems'],
                     SubProblemSolutions = state['sub_problem_solutions'],
-                    SubProblemSolutionsReasoning = state['sub_problem_reasoning'],
                     Dependencies = state['dependencies'],
                     SupportingDocuments = state['supporting_documents'],
                     Context = state['context']

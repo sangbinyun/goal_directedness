@@ -2,7 +2,7 @@ import argparse
 from datasets import load_dataset
 
 from problem_decomposition import build_graph
-from utils import set_env
+from utils import set_env, extract_data_info
 
 # Set environment variables
 set_env("OPENAI_API_KEY")
@@ -19,24 +19,6 @@ parser.add_argument('--ExperimentName', type = str, default = 'test') # Name of 
 parser.add_argument('--iteration', type = int, default = 100)
 
 config = parser.parse_args(args=['--model', 'openai'])
-
-
-def extract_dataset_info(data):
-    # Extract data info
-    unique_id = data['id']
-    question = data['question']
-    context = [
-        "{}. {}: {}".format(doc_id+1, title, " ".join(sentences)) 
-        for doc_id, (title, sentences)
-        in enumerate(
-            zip(
-                data['context']['title'], 
-                data['context']['sentences']
-            )
-        )
-    ]
-
-    return unique_id, question, context
 
 def save_state(graph, test_set, ExperimentName: str, iteration: int):
     # instantiate states
@@ -100,7 +82,7 @@ if __name__ == "__main__":
     # Run
     iteration = config.iteration
     for data_i in range(iteration):
-        unique_id, question, context = extract_dataset_info(test_set[data_i])
+        unique_id, question, context = extract_data_info(test_set[data_i])
 
         # Invoke the graphs
         thread = {"configurable": {"thread_id": unique_id}}
