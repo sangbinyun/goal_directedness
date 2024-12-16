@@ -7,4 +7,4 @@ __pycache__
 /test/reflexion
 /test/hotpot
 /test/langchain-academy
-/test/state_db
+state_db
