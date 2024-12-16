@@ -36,16 +36,16 @@ poetry install
 ```
 
 ## **Key Files**
-- problem_decomposition.py:
+- problem_decomposition.py: 
 Contains the LangGraph-based problem decomposition agent system.
 
-- prompt.py
+- prompt.py: 
 Stores the prompts used within the agent system.
 
-- naive.py
+- naive.py: 
 A single-step LLM benchmark for performance comparison.
 
-- run_problem_decomposition.py
+- run_problem_decomposition.py: 
 A standalone script for testing the problem decomposition system without additional dependencies.
 
 ---
