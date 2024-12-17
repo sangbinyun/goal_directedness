@@ -2,6 +2,9 @@
 
 This repository contains a **goal-directed agent system** built with LangGraph, designed to implement a **problem decomposition strategy** inspired by cognitive science.
 
+For a more detailed explanation of the **problem decomposition process** and experimental results, please refer to the PDF document:  
+[**2024 Problem Decomposition Document**](2024%20Problem%20Decomposition%20Document%20-%20Sangbin%20Yun.pdf)
+
 ---
 
 ## **Project Structure**
